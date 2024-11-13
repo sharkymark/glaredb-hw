@@ -66,6 +66,52 @@ ON sales.borough = lookup.borough_id
 GROUP BY lookup.borough_name;
 ```
 
+### Export the JOIN to a local table in your GlareDB deployment
+
+```sql
+CREATE TABLE sales_aggregate_by_borough AS
+    SELECT
+        COUNT(sales.sale_date),
+        lookup.borough_name
+    FROM
+        read_parquet('https://github.com/GlareDB/tutorial_data/raw/main/quickstart_data/nyc_sales-2022_01.parquet') sales
+    JOIN
+        read_postgres(
+            'postgresql://demo:demo@pg.demo.glaredb.com:5432/postgres',
+            'public',
+            'borough_lookup'
+        ) lookup
+    ON sales.borough = lookup.borough_id
+    GROUP BY lookup.borough_name;
+
+SELECT *
+FROM sales_aggregate_by_borough;
+```
+
+### Export the JOIN to a Parquet file
+
+```sql
+COPY (
+    SELECT
+        COUNT(sales.sale_date),
+        lookup.borough_name
+    FROM
+        read_parquet('https://github.com/GlareDB/tutorial_data/raw/main/quickstart_data/nyc_sales-2022_01.parquet') sales
+    JOIN
+        read_postgres(
+            'postgresql://demo:demo@pg.demo.glaredb.com:5432/postgres',
+            'public',
+            'borough_lookup'
+        ) lookup
+    ON sales.borough = lookup.borough_id
+    GROUP BY lookup.borough_name
+) TO './data/input/sales_aggregate_by_borough.parquet';
+
+SELECT *
+FROM './data/input/sales_aggregate_by_borough.parquet';
+```
+
+
 ## Resources
 
 [Python Mac versions](https://www.python.org/downloads/macos/)
@@ -75,6 +121,8 @@ GROUP BY lookup.borough_name;
 [GlareDB docs](https://docs.glaredb.com/)
 
 [GlareDB website](https://glaredb.com/)
+
+[Rust releases](https://doc.rust-lang.org/beta/releases.html)
 
 ## License
 
