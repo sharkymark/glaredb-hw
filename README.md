@@ -13,6 +13,8 @@ FROM read_parquet('https://github.com/GlareDB/tutorial_data/raw/main/quickstart_
 
 ### Query data from a local file
 
+> Manually [download the file](https://github.com/GlareDB/tutorial_data/raw/main/quickstart_data/nyc_sales-2022_02.parquet) and put in the `./data/input` directory
+
 ```sql
 -- Relative path to the same directory from which you started the GlareDB CLI
 SELECT * FROM read_parquet('./data/input/nyc_sales-2022_02.parquet');
