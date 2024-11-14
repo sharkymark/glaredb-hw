@@ -1,3 +1,4 @@
 /data/
 **/glaredb
 /venv/
+*.ipynb_checkpoints
