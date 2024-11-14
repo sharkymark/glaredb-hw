@@ -1,4 +1,4 @@
-# Glaredb playground
+# GlareDB playground
 
 This is a place to tinker with query federation OSS software GlareDB
 
