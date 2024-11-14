@@ -2,6 +2,10 @@
 
 This is a place to tinker with query federation OSS software GlareDB
 
+## Dev Container support
+
+> This is a work-in-progress. Currently not working on aarch64 (Mac M3) [Pull request](https://github.com/sharkymark/glaredb-hw/pull/1) to build an aarch64 distro of the `pip` package. Otherwise, `pip install glaredb` requires Rust because pypi doesn't have a prebuilt glaredb library for that arch/distro/etc combo so it tries to build from source.
+
 ## Sample Internet queries
 
 ### NYC real estate transactions from 2022
